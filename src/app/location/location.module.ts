@@ -3,6 +3,8 @@ import {NgModule} from '@angular/core';
 import {LocationRoutingModule} from './location-routing.module';
 import {LocationListComponent} from './location-list/location-list.component';
 import {SharedModule} from "../shared/shared.module";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -10,8 +12,10 @@ import {SharedModule} from "../shared/shared.module";
     LocationListComponent
   ],
   imports: [
+    SharedModule,
     LocationRoutingModule,
-    SharedModule
+    MatButtonModule,
+    MatIconModule
   ]
 })
 export class LocationModule { }

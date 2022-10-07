@@ -1,3 +1,14 @@
 .location {
+  padding: 3rem 9rem;
 
+  &__featureBar {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__header {
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 2rem;
+  }
 }
