@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LocationListComponent } from './location-list.component';
+import {By} from "@angular/platform-browser";
 
 describe('LocationListComponent', () => {
   let component: LocationListComponent;
@@ -22,12 +23,16 @@ describe('LocationListComponent', () => {
   });
 
   it("should render #add-location button", () => {
-    const component = fixture.componentInstance;
-    const bannerElement: HTMLElement = fixture.nativeElement;
+    const debugElement = fixture.debugElement;
+    const addLocationButton = debugElement.query(By.css('[testId="add-location"]'));
+    const addLocationButtonElement: HTMLElement = addLocationButton.nativeElement;
 
-    console.log(component)
-    console.log(bannerElement)
+    expect(addLocationButton)
+      .withContext("element exists")
+      .toBeTruthy();
 
-    pending('development')
+    expect(addLocationButtonElement.innerText.toLowerCase())
+      .withContext("tell user that this button is for adding a new location")
+      .toBe("add location");
   });
 });
