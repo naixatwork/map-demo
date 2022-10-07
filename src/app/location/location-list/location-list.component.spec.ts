@@ -2,6 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {LocationListComponent} from './location-list.component';
 import {By} from "@angular/platform-browser";
+import {SharedModule} from "../../shared/shared.module";
 
 describe('LocationListComponent', () => {
   let component: LocationListComponent;
@@ -9,7 +10,8 @@ describe('LocationListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LocationListComponent]
+      declarations: [LocationListComponent],
+      imports: [SharedModule]
     })
       .compileComponents();
 
@@ -33,6 +35,6 @@ describe('LocationListComponent', () => {
 
     expect(addLocationButtonElement.innerText.toLowerCase())
       .withContext("tell user that this button is for adding a new location")
-      .toBe("add location");
+      .toContain("add location");
   });
 });
