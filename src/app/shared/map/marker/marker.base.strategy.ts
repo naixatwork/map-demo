@@ -27,9 +27,10 @@ export abstract class MarkerBaseStrategy<MarkerType extends Marker> {
   public addMarker(newMarker: MarkerType): void {
     if (!newMarker) return;
 
-    console.log(newMarker)
     this.markers$.next(newMarker);
   }
+
+  abstract clearAllMarkers(): void;
 
   public unsubscribeAddMarker(): void {
     this.unsubscribeAddMarker$.next();

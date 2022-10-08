@@ -7,6 +7,7 @@ import {OpenstreetmapTileLayerStrategy} from "./tileLayerMap/openstreetmapTileLa
 import {Subject, takeUntil} from "rxjs";
 import {MarkerBaseStrategy} from "./marker/marker.base.strategy";
 import {LeafletMarkerStrategy} from "./marker/leafletMarker.strategy";
+import {coordinates} from "./map.type";
 
 @Injectable()
 export class MapService {
@@ -17,6 +18,8 @@ export class MapService {
   public get map(): MapService['_map'] {
     return this._map;
   }
+
+  public readonly onMapClicked$ = new Subject<coordinates>();
 
   private readonly initializeMapStrategy: InitializeMapBaseStrategy = new LeafletInitializeMapStrategy();
   private readonly tileLayerStrategy: TileLayerBaseStrategy = new OpenstreetmapTileLayerStrategy();
@@ -40,10 +43,23 @@ export class MapService {
     populateMapElement();
     loadTileLayer();
     initializeMarkers();
+    this.fireOnMapClicked();
   }
 
   public addMarker(newMarker: Marker): void {
     this.markerStrategy.addMarker(newMarker);
+  }
+
+  public clearMarkers(): void {
+    this.markerStrategy.clearAllMarkers();
+  }
+
+  private fireOnMapClicked(): void {
+    const onMapClicked = (clickEvent: coordinates) => {
+      this.onMapClicked$.next(clickEvent);
+    }
+
+    this.map.on('click', onMapClicked);
   }
 
   public completeSubscriptions(): void {

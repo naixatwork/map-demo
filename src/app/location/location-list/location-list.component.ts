@@ -13,7 +13,6 @@ export class LocationListComponent implements OnInit {
 
   ngOnInit(): void {
     this.locationBatchDialogService.openLocationBatchDialog();
-
   }
 
   public onAddLocationEvent(): void {

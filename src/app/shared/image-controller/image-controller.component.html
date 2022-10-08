@@ -1,0 +1,10 @@
+<form [formGroup]="form">
+  <div class="image-control__container">
+    <textarea type="text" matInput formControlName="value"></textarea>
+    <a class="image-control__link" target="_blank" [href]="form.value.value">
+      <img class="image-control__image"
+           alt="preview"
+           [src]="form.value.value"/>
+    </a>
+  </div>
+</form>

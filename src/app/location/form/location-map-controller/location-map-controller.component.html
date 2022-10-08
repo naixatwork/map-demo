@@ -1,1 +1,10 @@
-<p>location-map-controller works!</p>
+<form [formGroup]="form">
+  <div class="map__container">
+    <app-map
+      class="map__control"
+      (onMapClicked)="onMapClicked($event)"
+      [newMarkerCoordinates$]="newMarker$"
+      [clearAllMarks$]="clearAllMarkers$"
+    ></app-map>
+  </div>
+</form>

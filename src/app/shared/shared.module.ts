@@ -7,12 +7,14 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import { ImageControllerComponent } from './image-controller/image-controller.component';
 
 
 
 @NgModule({
   declarations: [
     MapComponent,
+    ImageControllerComponent,
   ],
   imports: [
     CommonModule,
@@ -24,16 +26,17 @@ import {MatSelectModule} from "@angular/material/select";
     MatInputModule,
     MatSelectModule
   ],
-  exports: [
-    CommonModule,
-    MatButtonModule,
-    MatIconModule,
-    MapComponent,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule
-  ]
+    exports: [
+        CommonModule,
+        MatButtonModule,
+        MatIconModule,
+        MapComponent,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        ImageControllerComponent
+    ]
 })
 export class SharedModule { }

@@ -10,7 +10,17 @@ export class LeafletMarkerStrategy extends MarkerBaseStrategy<Marker> {
   }
 
   override addMarkerToMap(marker: Marker): void {
-    console.log(marker)
     marker.addTo(this.map);
+  }
+
+  clearAllMarkers(): void {
+    // @ts-ignore
+    const layers = this.map?._layers;
+
+    for (const index in layers) {
+      if(layers[index] instanceof Marker) {
+        this.map.removeLayer(layers[index]);
+      }
+    }
   }
 }

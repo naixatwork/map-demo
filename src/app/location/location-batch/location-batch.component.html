@@ -1,17 +1,40 @@
 <div class="location">
-
-  <h1 class="location__head-line">share location</h1>
+  <div class="location__action">
+    <h1 class="location__head-line">share location</h1>
+    <div class="location__action__buttons">
+      <button [disabled]="form.invalid" (click)="submit()" class="location__action__button" mat-raised-button color="primary">save <mat-icon>done</mat-icon></button>
+      <button (click)="closeDialog()" class="location__action__button" mat-button color="accent">cancel <mat-icon>cancel</mat-icon></button>
+    </div>
+  </div>
 
   <form [formGroup]="form" class="location__form">
 
     <mat-form-field appearance="outline" class="location__form-control">
       <mat-label class="location__form-label">location name</mat-label>
       <input matInput required formControlName="name">
+      <mat-error>location name is required</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="location__form-control">
       <mat-label class="location__form-label">location type</mat-label>
       <app-location-type-controller formControlName="type"></app-location-type-controller>
+      <mat-error>location type is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="location__form-control">
+      <mat-label class="location__form-label">location on map</mat-label>
+      <app-location-map-controller formControlName="coordinates"></app-location-map-controller>
+      <mat-hint>click on the map to mark your location</mat-hint>
+      <mat-error>click on the map to mark your location</mat-error>
+      <mat-error>location on map type is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="location__form-control">
+      <mat-label class="location__form-label">location image</mat-label>
+      <app-image-controller formControlName="imageUrl"></app-image-controller>
+      <mat-hint>please put an image url e.g. "https://cdn2.thecatapi.com/images/a4j.jpg"</mat-hint>
+      <mat-error>please put an image url e.g. "https://cdn2.thecatapi.com/images/a4j.jpg"</mat-error>
+      <mat-error>location image is required</mat-error>
     </mat-form-field>
 
   </form>
