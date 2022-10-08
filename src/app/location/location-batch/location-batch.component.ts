@@ -1,6 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
+import {LocationBatchUpdateStrategyService} from "./locationBatchStrategy/location-batch-update.strategy.service";
+import {LocationBatchCreateStrategyService} from "./locationBatchStrategy/location-batch-create.strategy.service";
+import {LocationBatchBaseStrategy} from "./locationBatchStrategy/locationBatch.base.strategy";
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-location-batch',
@@ -9,12 +13,26 @@ import {MatDialogRef} from "@angular/material/dialog";
 })
 export class LocationBatchComponent implements OnInit {
   public form!: FormGroup;
+  private submitStrategy!: LocationBatchBaseStrategy;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public dialogData: any,
     private readonly formBuilder: FormBuilder,
-    private readonly dialogRef: MatDialogRef<any>
+    private readonly dialogRef: MatDialogRef<LocationBatchComponent>,
+    private readonly updateStrategyService: LocationBatchUpdateStrategyService,
+    private readonly createStrategyService: LocationBatchCreateStrategyService
   ) {
+    const setSubmitStrategy = () => {
+      console.log(this.dialogData)
+      if (this.dialogData) {
+        this.submitStrategy = updateStrategyService;
+      } else {
+        this.submitStrategy = createStrategyService;
+      }
+    }
+
     this.createForm();
+    setSubmitStrategy();
   }
 
   ngOnInit(): void {
@@ -34,6 +52,7 @@ export class LocationBatchComponent implements OnInit {
   }
 
   public submit(): void {
-    console.log(this.form.value)
+    this.submitStrategy.submit(this.form.value);
   }
 }
+

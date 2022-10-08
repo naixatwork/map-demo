@@ -19,7 +19,7 @@ import {Location} from "../../location.type";
 })
 export class LocationTypeControllerComponent extends MatFormFieldAdapter<string> implements OnInit {
 
-  public readonly locationTypeOptions: Set<Location['type']> = new Set([
+  public readonly locationTypeOptions: Set<Location['type']['value']> = new Set([
     "cafe",
     "business",
     "store",

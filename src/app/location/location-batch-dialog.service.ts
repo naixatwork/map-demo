@@ -13,9 +13,7 @@ export class LocationBatchDialogService {
 
   public openLocationBatchDialog(): void {
     this.matDialog.open(LocationBatchComponent, {
-      data: {
-        dastan: "dastan"
-      }
+      data: null
     })
   }
 }
