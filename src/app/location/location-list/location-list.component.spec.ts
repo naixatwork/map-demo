@@ -24,7 +24,7 @@ describe('LocationListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it("should render #add-location button", () => {
+  it("should render add-location button", () => {
     const debugElement = fixture.debugElement;
     const addLocationButton = debugElement.query(By.css('[testId="add-location"]'));
     const addLocationButtonElement: HTMLElement = addLocationButton.nativeElement;
