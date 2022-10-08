@@ -1,0 +1,23 @@
+.location {
+  min-width: 30vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__head-line {
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 2rem;
+  }
+
+  &__form {
+  }
+
+  &__form-control {
+    width: 100%;
+  }
+
+  &__form-label {
+    text-transform: capitalize;
+  }
+}

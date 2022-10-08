@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {LocationBatchDialogService} from "../location-batch-dialog.service";
 
 @Component({
   selector: 'app-location-list',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LocationListComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private readonly locationBatchDialogService: LocationBatchDialogService) {
   }
 
+  ngOnInit(): void {
+    this.locationBatchDialogService.openLocationBatchDialog();
+
+  }
+
+  public onAddLocationEvent(): void {
+    this.locationBatchDialogService.openLocationBatchDialog();
+  }
 }
