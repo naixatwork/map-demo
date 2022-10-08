@@ -9,7 +9,10 @@
       <input matInput required formControlName="name">
     </mat-form-field>
 
-
+    <mat-form-field appearance="outline" class="location__form-control">
+      <mat-label class="location__form-label">location type</mat-label>
+      <app-location-type-controller formControlName="type"></app-location-type-controller>
+    </mat-form-field>
 
   </form>
 </div>

@@ -11,15 +11,19 @@ export class LocationBatchComponent implements OnInit {
 
   constructor(
     private readonly formBuilder: FormBuilder
-  ) { }
+  ) {
+    this.form = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      type: [{value: 'cafe'}, [Validators.required]]
+    })
 
-  ngOnInit(): void {
     this.createForm();
   }
 
+  ngOnInit(): void {
+  }
+
   public createForm(): void {
-    this.form = this.formBuilder.group({
-      name: ['', [Validators.required]],
-    })
+
   }
 }

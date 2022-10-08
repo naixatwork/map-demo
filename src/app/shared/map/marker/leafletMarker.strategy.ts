@@ -6,7 +6,6 @@ export class LeafletMarkerStrategy extends MarkerBaseStrategy<Marker> {
   override markers$ = new Subject<Marker>();
 
   constructor(map: Map) {
-    console.log(map)
     super(map);
   }
 
