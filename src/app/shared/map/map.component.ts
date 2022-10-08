@@ -20,6 +20,6 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.mapService.stopLoadingTileLayer();
+    this.mapService.completeSubscriptions();
   }
 }
