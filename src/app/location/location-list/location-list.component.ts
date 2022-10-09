@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 import {LocationBatchDialogService} from "../location-batch/location-batch-dialog.service";
 import {LocationListService} from "./location-list.service";
 import {Column, IndexColumn, OperationColumn, paginationMode, TableConfig} from "../../shared/table/table.model";
@@ -43,7 +43,7 @@ export class LocationListComponent implements AfterViewInit {
               icon: 'edit',
               tooltip: 'edit location',
               operation: (location: Location) => {
-                console.log(location)
+                this.locationBatchDialogService.openLocationBatchDialog(location);
               }
             }
           ]
