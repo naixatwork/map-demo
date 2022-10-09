@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-import {LocationBatchComponent} from "./location-batch/location-batch.component";
+import {LocationBatchComponent} from "./location-batch.component";
+import {Location} from "../location.type";
 
 @Injectable()
 export class LocationBatchDialogService {
@@ -11,9 +12,9 @@ export class LocationBatchDialogService {
   ) {
   }
 
-  public openLocationBatchDialog(): void {
+  public openLocationBatchDialog(data?: Location): void {
     this.matDialog.open(LocationBatchComponent, {
-      data: null
+      data: data || null
     })
   }
 }

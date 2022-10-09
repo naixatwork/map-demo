@@ -1,10 +1,10 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Injector, OnInit} from '@angular/core';
 import {MatFormFieldControl} from "@angular/material/form-field";
 import {MatFormFieldAdapter} from "../../../shared/MatFormFieldAdapter/MatFormFieldAdapter";
 import {FormBuilder, Validators} from "@angular/forms";
 import {FormControlAdapter} from "../../../shared/FormControlAdapater/FormControlAdapter";
 import {coordinates} from "../../../shared/map/map.type";
-import {map, Observable, Subject, tap} from "rxjs";
+import {map, Observable, ReplaySubject, Subject, tap} from "rxjs";
 import {marker, Marker} from "leaflet";
 
 @Component({
@@ -19,8 +19,9 @@ import {marker, Marker} from "leaflet";
     }
   ]
 })
-export class LocationMapControllerComponent extends MatFormFieldAdapter<{ lat: number, lng: number }> implements OnInit {
+export class LocationMapControllerComponent extends MatFormFieldAdapter<{ lat: number, lng: number }> implements OnInit, AfterViewInit {
   public readonly clearAllMarkers$ = new Subject<void>();
+  public readonly marker$ = new ReplaySubject<Marker>();
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -39,6 +40,17 @@ export class LocationMapControllerComponent extends MatFormFieldAdapter<{ lat: n
   ngOnInit(): void {
   }
 
+  ngAfterViewInit() {
+    const setMarkerIfFormHasDefaultValue = () => {
+      if (this.form.value.lat && this.form.value.lng) {
+        this.addMarker(marker([this.form.value.lat, this.form.value.lng]));
+      }
+    }
+
+    this.setMarkerOnFormChange();
+    setMarkerIfFormHasDefaultValue();
+  }
+
   public onMapClicked(coordinates: coordinates): void {
     this.form.setValue({
       lat: coordinates.latlng.lat,
@@ -46,14 +58,19 @@ export class LocationMapControllerComponent extends MatFormFieldAdapter<{ lat: n
     })
   }
 
-  public get newMarker$(): Observable<Marker> {
-    return this.form.valueChanges
+  public setMarkerOnFormChange(): void {
+    this.form.valueChanges
       .pipe(
         tap(() => {
           this.clearAllMarkers$.next();
         }),
-        map((coordinates) => {
-          return marker([coordinates.lat, coordinates.lng])
-        }));
+        tap((coordinates) => {
+          this.addMarker(marker([coordinates.lat, coordinates.lng]))
+        }))
+      .subscribe();
+  }
+
+  private addMarker(newMarker: Marker): void {
+    this.marker$.next(newMarker);
   }
 }

@@ -1,0 +1,7 @@
+<div class="location-popup">
+  <img class="location-popup__image" [src]="location.imageUrl.value" [alt]="location.name">
+  <p class="location-popup__name">{{location.name}}</p>
+  <div class="location-popup__actions">
+    <button mat-raised-button color="primary" (click)="editLocation()">edit</button>
+  </div>
+</div>

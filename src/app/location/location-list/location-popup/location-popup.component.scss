@@ -1,0 +1,29 @@
+.location-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__details {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  &__name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    margin: 0;
+  }
+
+  &__image {
+    width: 13rem;
+    aspect-ratio: 1/1;
+    border-radius: .5rem;
+  }
+
+  &__actions {
+    display: flex;
+  }
+}

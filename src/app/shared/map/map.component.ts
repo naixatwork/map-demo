@@ -55,7 +55,6 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     if (!this.newMarkerCoordinates$) return;
 
     const onNewCoordinates = (newMarker: Marker) => {
-      console.log(newMarker)
       this.mapService.addMarker(newMarker);
     }
 

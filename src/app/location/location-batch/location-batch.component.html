@@ -1,8 +1,8 @@
 <div class="location">
   <div class="location__action">
-    <h1 class="location__head-line">share location</h1>
+    <h1 class="location__head-line">{{this.mode === "edit" ? "edit location" : "share location"}}</h1>
     <div class="location__action__buttons">
-      <button [disabled]="form.invalid" (click)="submit()" class="location__action__button" mat-raised-button color="primary">save <mat-icon>done</mat-icon></button>
+      <button (click)="submit()" class="location__action__button" mat-raised-button color="primary">save <mat-icon>done</mat-icon></button>
       <button (click)="closeDialog()" class="location__action__button" mat-button color="accent">cancel <mat-icon>cancel</mat-icon></button>
     </div>
   </div>

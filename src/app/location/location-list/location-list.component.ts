@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {LocationBatchDialogService} from "../location-batch-dialog.service";
+import {AfterViewInit, Component, OnInit, ViewContainerRef} from '@angular/core';
+import {LocationBatchDialogService} from "../location-batch/location-batch-dialog.service";
 import {LocationListService} from "./location-list.service";
 
 @Component({
@@ -11,7 +11,7 @@ export class LocationListComponent implements OnInit, AfterViewInit {
 
   constructor(
     private readonly locationBatchDialogService: LocationBatchDialogService,
-    public readonly locationListService: LocationListService
+    public readonly locationListService: LocationListService,
   ) {
   }
 

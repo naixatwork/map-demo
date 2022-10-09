@@ -1,15 +1,18 @@
-import {Injectable} from '@angular/core';
-import {map, Observable, ReplaySubject, Subject, switchMap} from "rxjs";
+import {ComponentFactoryResolver, Injectable, Injector, ViewContainerRef} from '@angular/core';
+import {Observable, ReplaySubject, switchMap} from "rxjs";
 import {Location} from "../location.type";
 import {LocalStorageService} from "../../core/local-storage.service";
 import {marker} from "leaflet";
+import {LocationPopupComponent} from "./location-popup/location-popup.component";
 
 @Injectable()
 export class LocationListService {
   public locations$ = new ReplaySubject<Location[]>();
 
   constructor(
-    private readonly localStorageService: LocalStorageService
+    private readonly localStorageService: LocalStorageService,
+    private readonly resolver: ComponentFactoryResolver,
+    private readonly injector: Injector
   ) {
     this.setLocationsFromStorage();
   }
@@ -23,7 +26,22 @@ export class LocationListService {
     return this.locations$
       .pipe(
         switchMap((locations: Location[]) => {
-          return locations.map(location => marker([location.coordinates.lat, location.coordinates.lng]));
+          return locations.map((location) => {
+              const createPopupComponent = () => {
+                const popupComponent = this.resolver.resolveComponentFactory(LocationPopupComponent)
+                  .create(this.injector);
+                popupComponent.setInput("location", location);
+                popupComponent.changeDetectorRef.detectChanges();
+                return popupComponent;
+              }
+
+              return marker(
+                [location.coordinates.lat, location.coordinates.lng],
+                {title: location.name}
+              )
+                .bindPopup(createPopupComponent().location.nativeElement)
+            }
+          );
         })
       )
   }

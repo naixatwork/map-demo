@@ -3,7 +3,7 @@
     <app-map
       class="map__control"
       (onMapClicked)="onMapClicked($event)"
-      [newMarkerCoordinates$]="newMarker$"
+      [newMarkerCoordinates$]="marker$.asObservable()"
       [clearAllMarks$]="clearAllMarkers$"
     ></app-map>
   </div>
