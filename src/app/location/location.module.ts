@@ -14,6 +14,7 @@ import {
 import {
   LocationBatchUpdateStrategyService
 } from "./location-batch/locationBatchStrategy/location-batch-update.strategy.service";
+import {LocationListService} from "./location-list/location-list.service";
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {
   providers: [
     LocationBatchDialogService,
     LocationBatchCreateStrategyService,
-    LocationBatchUpdateStrategyService
+    LocationBatchUpdateStrategyService,
+    LocationListService
   ]
 })
 export class LocationModule { }

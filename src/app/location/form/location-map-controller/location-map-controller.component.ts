@@ -4,7 +4,7 @@ import {MatFormFieldAdapter} from "../../../shared/MatFormFieldAdapter/MatFormFi
 import {FormBuilder, Validators} from "@angular/forms";
 import {FormControlAdapter} from "../../../shared/FormControlAdapater/FormControlAdapter";
 import {coordinates} from "../../../shared/map/map.type";
-import {map, Observable, Subject} from "rxjs";
+import {map, Observable, Subject, tap} from "rxjs";
 import {marker, Marker} from "leaflet";
 
 @Component({
@@ -19,7 +19,7 @@ import {marker, Marker} from "leaflet";
     }
   ]
 })
-export class LocationMapControllerComponent extends MatFormFieldAdapter<{lat: number, lng: number}> implements OnInit {
+export class LocationMapControllerComponent extends MatFormFieldAdapter<{ lat: number, lng: number }> implements OnInit {
   public readonly clearAllMarkers$ = new Subject<void>();
 
   constructor(
@@ -48,9 +48,12 @@ export class LocationMapControllerComponent extends MatFormFieldAdapter<{lat: nu
 
   public get newMarker$(): Observable<Marker> {
     return this.form.valueChanges
-      .pipe(map((coordinates) => {
-        this.clearAllMarkers$.next();
-        return marker([coordinates.lat, coordinates.lng])
-      }));
+      .pipe(
+        tap(() => {
+          this.clearAllMarkers$.next();
+        }),
+        map((coordinates) => {
+          return marker([coordinates.lat, coordinates.lng])
+        }));
   }
 }

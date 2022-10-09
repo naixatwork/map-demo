@@ -1,12 +1,14 @@
 <div class="location">
   <div class="location__featureBar">
     <h1 class="location__header">your locations</h1>
-    <button (click)="onAddLocationEvent()" mat-raised-button color="primary" id="add-location" testId="add-location">
+    <button (click)="addLocation()" mat-raised-button color="primary" id="add-location" testId="add-location">
       <mat-icon>add</mat-icon>
       add location
     </button>
   </div>
   <div class="location__map-container">
-    <app-map></app-map>
+    <app-map
+      [newMarkerCoordinates$]="locationListService.locationMarkers$"
+    ></app-map>
   </div>
 </div>
