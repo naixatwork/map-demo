@@ -6,6 +6,7 @@ import {LocationBatchCreateStrategyService} from "./locationBatchStrategy/locati
 import {LocationBatchBaseStrategy} from "./locationBatchStrategy/locationBatch.base.strategy";
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {LocationBatchDialogService} from "./location-batch-dialog.service";
+import {Location} from "../location.type";
 
 @Component({
   selector: 'app-location-batch',
@@ -18,7 +19,7 @@ export class LocationBatchComponent implements OnInit {
   public mode: "edit" | "create" = "create";
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public dialogData: any,
+    @Inject(MAT_DIALOG_DATA) public dialogData: Location,
     private readonly formBuilder: FormBuilder,
     private readonly dialogRef: MatDialogRef<LocationBatchComponent>,
     private readonly updateStrategyService: LocationBatchUpdateStrategyService,
@@ -64,7 +65,12 @@ export class LocationBatchComponent implements OnInit {
   }
 
   public submit(): void {
-    this.submitStrategy.submit({id: this.dialogData.id ,...this.form.value});
+    let submitValue = this.form.value;
+    if (this.mode === "edit") {
+      submitValue.id = this.dialogData.id;
+    }
+
+    this.submitStrategy.submit(submitValue);
     this.closeDialog();
   }
 }

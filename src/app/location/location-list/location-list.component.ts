@@ -7,7 +7,7 @@ import {LocationListService} from "./location-list.service";
   templateUrl: './location-list.component.html',
   styleUrls: ['./location-list.component.scss']
 })
-export class LocationListComponent implements OnInit, AfterViewInit {
+export class LocationListComponent implements OnInit {
 
   constructor(
     private readonly locationBatchDialogService: LocationBatchDialogService,
@@ -20,9 +20,5 @@ export class LocationListComponent implements OnInit, AfterViewInit {
 
   public addLocation(): void {
     this.locationBatchDialogService.openLocationBatchDialog();
-  }
-
-  ngAfterViewInit() {
-    // this.locationListService.setLocationsFromStorage();
   }
 }

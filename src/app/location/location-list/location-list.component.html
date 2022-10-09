@@ -8,6 +8,7 @@
   </div>
   <div class="location__map-container">
     <app-map
+      [clearAllMarks$]="locationListService.clearAllMarks$"
       [newMarkerCoordinates$]="locationListService.locationMarkers$"
     ></app-map>
   </div>

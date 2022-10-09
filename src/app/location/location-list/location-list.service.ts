@@ -1,20 +1,24 @@
 import {ComponentFactoryResolver, Injectable, Injector, ViewContainerRef} from '@angular/core';
-import {Observable, ReplaySubject, switchMap} from "rxjs";
+import {Observable, ReplaySubject, Subject, switchMap} from "rxjs";
 import {Location} from "../location.type";
 import {LocalStorageService} from "../../core/local-storage.service";
 import {marker} from "leaflet";
 import {LocationPopupComponent} from "./location-popup/location-popup.component";
+import {LocationBatchDialogService} from "../location-batch/location-batch-dialog.service";
 
 @Injectable()
 export class LocationListService {
   public locations$ = new ReplaySubject<Location[]>();
+  public clearAllMarks$ = new Subject<void>();
 
   constructor(
     private readonly localStorageService: LocalStorageService,
+    private readonly locationBatchDialogService: LocationBatchDialogService,
     private readonly resolver: ComponentFactoryResolver,
     private readonly injector: Injector
   ) {
     this.setLocationsFromStorage();
+    this.updateMarksOnDialogClosed();
   }
 
   public setLocationsFromStorage(): void {
@@ -44,5 +48,12 @@ export class LocationListService {
           );
         })
       )
+  }
+
+  private updateMarksOnDialogClosed(): void {
+    this.locationBatchDialogService.dialogClosed$.subscribe(() => {
+      this.clearAllMarks$.next();
+      this.setLocationsFromStorage();
+    })
   }
 }
