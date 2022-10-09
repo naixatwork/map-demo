@@ -9,10 +9,10 @@ export class LocationBatchUpdateStrategyService implements LocationBatchBaseStra
 
   constructor(private readonly localStorageService: LocalStorageService) { }
 
-  submit(newLocation: Location): void {
+  submit(newLocation: Location, id: number): void {
     const locations: Location[] = this.localStorageService.getItem<Location[]>("locations") || [];
 
-    let targetLocationIndex = locations.findIndex((location) => location.id === newLocation.id);
+    let targetLocationIndex = locations.findIndex((location) => location.id === id);
     if(targetLocationIndex === -1) return;
 
     locations[targetLocationIndex] = newLocation;
@@ -20,3 +20,5 @@ export class LocationBatchUpdateStrategyService implements LocationBatchBaseStra
     this.localStorageService.setItem("locations", locations);
   }
 }
+
+

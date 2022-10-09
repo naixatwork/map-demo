@@ -65,12 +65,7 @@ export class LocationBatchComponent implements OnInit {
   }
 
   public submit(): void {
-    let submitValue = this.form.value;
-    if (this.mode === "edit") {
-      submitValue.id = this.dialogData.id;
-    }
-
-    this.submitStrategy.submit(submitValue);
+    this.submitStrategy.submit(this.form.value, this.dialogData?.id || undefined);
     this.closeDialog();
   }
 }
