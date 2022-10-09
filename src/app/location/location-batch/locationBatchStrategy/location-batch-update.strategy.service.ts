@@ -12,8 +12,11 @@ export class LocationBatchUpdateStrategyService implements LocationBatchBaseStra
   submit(newLocation: Location): void {
     const locations: Location[] = this.localStorageService.getItem<Location[]>("locations") || [];
 
-    const targetLocation = locations.find((location) => location.id === newLocation.id);
+    let targetLocationIndex = locations.findIndex((location) => location.id === newLocation.id);
+    if(targetLocationIndex === -1) return;
 
-    console.log(targetLocation);
+    locations[targetLocationIndex] = newLocation;
+
+    this.localStorageService.setItem("locations", locations);
   }
 }
