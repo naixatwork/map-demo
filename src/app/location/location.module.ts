@@ -17,6 +17,7 @@ import {
 import {LocationListService} from "./location-list/location-list.service";
 import { LocationPopupComponent } from './location-list/location-popup/location-popup.component';
 import {CommonModule} from "@angular/common";
+import {TableModule} from "../shared/table/table.module";
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import {CommonModule} from "@angular/common";
     SharedModule,
     LocationRoutingModule,
     MatDialogModule,
+    TableModule,
 
   ],
   providers: [

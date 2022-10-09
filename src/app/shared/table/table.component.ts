@@ -1,3 +1,4 @@
+
 import {
   Component,
   Input,
@@ -13,7 +14,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as _ from 'lodash';
-import { ThemePalette } from '@angular/material/core/common-behaviors/color';
+import {ThemePalette} from "@angular/material/core";
 
 @Component({
   selector: 'app-table',
@@ -29,12 +30,12 @@ export class TableComponent<T> implements OnInit, OnChanges, OnDestroy {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  private unsubscribeAll: Subject<never>;
+  private unsubscribeAll: Subject<void>;
 
   constructor() {
     this.state = State.INIT;
     this.displayedColumns = [];
-    this.unsubscribeAll = new Subject<never>();
+    this.unsubscribeAll = new Subject<void>();
   }
 
   ngOnInit(): void {

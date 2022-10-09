@@ -6,10 +6,14 @@
       add location
     </button>
   </div>
+
   <div class="location__map-container">
     <app-map
       [clearAllMarks$]="locationListService.clearAllMarks$"
       [newMarkerCoordinates$]="locationListService.locationMarkers$"
     ></app-map>
+  </div>
+  <div class="location__table">
+    <app-table [config]="tableConfig"></app-table>
   </div>
 </div>

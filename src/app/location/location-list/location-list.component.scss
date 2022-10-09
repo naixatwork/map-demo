@@ -1,8 +1,14 @@
 .location {
-  padding: 3rem 9rem;
+  padding: 3rem 3rem;
   display: grid;
   gap: 3rem;
   grid-template-columns: repeat(5, 1fr);
+
+  @media (min-width: 1300px) {
+    & {
+      padding: 3rem 9rem;
+    }
+  }
 
   &__featureBar {
     display: flex;
@@ -17,10 +23,15 @@
     font-size: 2rem;
   }
 
-  &__map-container {
-    grid-column-start: 3;
+  &__table {
+    grid-column-start: 5;
     grid-column-end: 6;
-    aspect-ratio: 2/1.5;
+  }
+
+  &__map-container {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    aspect-ratio: 2/1;
     outline: 1px solid #c2c2c2;
   }
 }

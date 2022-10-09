@@ -1,10 +1,11 @@
 import {ComponentFactoryResolver, Injectable, Injector, ViewContainerRef} from '@angular/core';
-import {Observable, ReplaySubject, Subject, switchMap} from "rxjs";
+import {map, Observable, ReplaySubject, Subject, switchMap} from "rxjs";
 import {Location} from "../location.type";
 import {LocalStorageService} from "../../core/local-storage.service";
 import {marker} from "leaflet";
 import {LocationPopupComponent} from "./location-popup/location-popup.component";
 import {LocationBatchDialogService} from "../location-batch/location-batch-dialog.service";
+import {Response} from "../../shared/models/response.model";
 
 @Injectable()
 export class LocationListService {
@@ -24,6 +25,18 @@ export class LocationListService {
   public setLocationsFromStorage(): void {
     const storedLocations = this.localStorageService.getItem<Location[]>("locations");
     this.locations$.next(storedLocations || []);
+  }
+
+  public get locationsResponse(): Observable<Response<Location>> {
+    return this.locations$
+      .pipe(
+        map((locations) => {
+          return {
+            data: locations,
+            count: locations.length
+          }
+        })
+      )
   }
 
   public get locationMarkers$(): Observable<any> {

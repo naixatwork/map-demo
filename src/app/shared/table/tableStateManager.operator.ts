@@ -1,6 +1,6 @@
 import { State, TableConfig } from './table.model';
 import { defer, Observable } from 'rxjs';
-import { Response } from '#shared/models/response.model';
+import { Response } from '../models/response.model';
 import { tap } from 'rxjs/operators';
 
 export function tableStateManager<T>(

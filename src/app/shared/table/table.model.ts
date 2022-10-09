@@ -5,7 +5,7 @@ export class TableConfig<T> {
   constructor(
     public data: Array<T>,
     public columns: Array<ColumnType<T>>,
-    _pagination: { length: number | null; mode: Mode | null }
+    _pagination: { length: number | null; mode: paginationMode | null }
   ) {
     this.pagination.total = _pagination.length;
     this.pagination.mode = _pagination.mode;
@@ -34,9 +34,9 @@ export interface Pagination {
   pageIndex: number;
   pageSize: number;
   pageSizeOptions: Array<number>;
-  mode: Mode | null;
+  mode: paginationMode | null;
 }
-export enum Mode {
+export enum paginationMode {
   LOCAL = 'LOCAL',
   SERVER = 'SERVER',
 }
