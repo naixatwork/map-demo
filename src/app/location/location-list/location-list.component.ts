@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {LocationBatchDialogService} from "../location-batch/location-batch-dialog.service";
 import {LocationListService} from "./location-list.service";
 import {Column, IndexColumn, OperationColumn, paginationMode, TableConfig} from "../../shared/table/table.model";
@@ -11,7 +11,7 @@ import {tableStateManager} from "../../shared/table/tableStateManager.operator";
   templateUrl: './location-list.component.html',
   styleUrls: ['./location-list.component.scss']
 })
-export class LocationListComponent implements OnInit {
+export class LocationListComponent implements AfterViewInit {
   public tableConfig: TableConfig<Location> = new TableConfig<Location>([], [], {
     mode: null,
     length: null
@@ -25,8 +25,9 @@ export class LocationListComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit() {
     this.initializeTable();
+
   }
 
   private setLocationTableConfig(locations: Location[], length: number): void {
